@@ -895,15 +895,16 @@ nav a:hover::after {
     backdrop-filter: blur(5px); /* Efek blur estetik pada background */
 }
 
-/* Mengatur gambar di dalam modal */
+/* Mengatur gambar di dalam modal agar proporsional di semua layar */
 .modal-content {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px; /* Batas maksimal lebar di laptop */
-    max-height: 80vh; /* Batas maksimal tinggi agar tidak terpotong */
-    object-fit: contain;
-    border-radius: 12px; /* Sudut melengkung halus */
+    width: auto; /* KUNCI 1: Lebar otomatis mengikuti proporsi asli */
+    height: auto; /* KUNCI 2: Tinggi otomatis mengikuti proporsi asli */
+    max-width: 90%; /* Membatasi agar tidak mentok kanan-kiri layar desktop */
+    max-height: 85vh; /* KUNCI 3: Membatasi tinggi maksimal sebesar 85% tinggi layar biar tidak jebol ke bawah */
+    object-fit: contain; /* KUNCI 4: Menjaga foto tetap utuh tanpa terpotong atau gepeng */
+    border-radius: 12px;
     
     /* Animasi zoom masuk */
     animation-name: zoomIn;
