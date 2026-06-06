@@ -877,3 +877,82 @@ nav a:hover::after {
     background: #20ba56;
     transform: translateY(-2px);
 }
+
+/* ==========================================
+   EFEK FULL SCREEN GALERI (LIGHTBOX)
+   ========================================== */
+.modal-galeri {
+    display: none; /* Tersembunyi di awal */
+    position: fixed;
+    z-index: 2000; /* Berada di paling depan, di atas nav bar */
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9); /* Latar belakang hitam pekat elegan */
+    backdrop-filter: blur(5px); /* Efek blur estetik pada background */
+}
+
+/* Mengatur gambar di dalam modal */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px; /* Batas maksimal lebar di laptop */
+    max-height: 80vh; /* Batas maksimal tinggi agar tidak terpotong */
+    object-fit: contain;
+    border-radius: 12px; /* Sudut melengkung halus */
+    
+    /* Animasi zoom masuk */
+    animation-name: zoomIn;
+    animation-duration: 0.3s;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Tombol Tutup (X) */
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    user-select: none;
+}
+
+.modal-close:hover {
+    color: #ff4f8b; /* Berubah pink khas saat di-hover */
+    transform: scale(1.1);
+}
+
+/* Penyesuaian kursor pada foto galeri utama */
+.galeri-item img {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Efek sedikit terangkat saat foto galeri didekati kursor */
+.galeri-item img:hover {
+    transform: scale(1.03);
+}
+
+/* Pengaturan untuk Layar HP */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 92%; /* Lebih lebar di HP agar puas dilihat */
+        padding-top: 20px;
+    }
+    .modal-close {
+        top: 15px;
+        right: 25px;
+        font-size: 35px;
+    }
+}

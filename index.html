@@ -65,7 +65,7 @@
 <div class="cards">
     <div class="card" onclick="toggleTombol(this)">
         <div class="card-image-container">
-            <img src="img/bouquet4.jpg" alt="Hantaran Pernikahan">
+            <img src="img/B10.jpeg" alt="Hantaran Pernikahan">
             <a class="btn-pesan" href="javascript:wa('Halo saya ingin memesan Hantaran Pernikahan')">
                 Pesan Sekarang
             </a>
@@ -76,7 +76,7 @@
 
     <div class="card" onclick="toggleTombol(this)">
         <div class="card-image-container">
-            <img src="img/bouquet2.jpg" alt="Snack Tower">
+            <img src="img/B8.jpeg" alt="Snack Tower">
             <a class="btn-pesan" href="javascript:wa('Halo saya ingin memesan Snack Tower')">
                 Pesan Sekarang
             </a>
@@ -87,7 +87,7 @@
 
     <div class="card" onclick="toggleTombol(this)">
         <div class="card-image-container">
-            <img src="img/bouquet3.jpg" alt="Bouquet Satin">
+            <img src="img/B7.jpeg" alt="Bouquet Satin">
             <a class="btn-pesan" href="javascript:wa('Halo saya ingin memesan Bouquet Satin')">
                 Pesan Sekarang
             </a>
@@ -109,7 +109,7 @@
 
     <div class="card" onclick="toggleTombol(this)">
         <div class="card-image-container">
-            <img src="img/bouquet3.jpg" alt="Bouquet Boneka">
+            <img src="img/B5.jpeg" alt="Bouquet Boneka">
             <a class="btn-pesan" href="javascript:wa('Halo saya ingin memesan Bouquet Boneka')">
                 Pesan Sekarang
             </a>
@@ -199,6 +199,16 @@
     
     <div class="galeri-grid">
         <div class="galeri-item">
+            <img src="img/B9.jpeg" alt="Dokumentasi Pelanggan Senja Craft">
+            
+        </div>
+
+        <div class="galeri-item">
+            <img src="img/B10.jpeg" alt="Dokumentasi Pelanggan Senja Craft">
+            
+        </div>
+
+        <div class="galeri-item">
             <img src="img/B1.jpeg" alt="Dokumentasi Pelanggan Senja Craft">
             
         </div>
@@ -214,7 +224,7 @@
         </div>
 
         <div class="galeri-item">
-            <img src="img/B4.jpeg" alt="Dokumentasi Pelanggan Senja Craft">
+            <img src="img/B8.jpeg" alt="Dokumentasi Pelanggan Senja Craft">
             
         </div>
 
@@ -428,6 +438,38 @@ function kirimPesanKalkulator() {
 window.addEventListener('DOMContentLoaded', () => {
     updateVariasi();
 });
+</script>
+
+<div id="galeriModal" class="modal-galeri">
+    <span class="modal-close" onclick="tutupGaleri()">&times;</span>
+    <img class="modal-content" id="imgModalFull">
+</div>
+
+<script>
+    const modal = document.getElementById("galeriModal");
+    const modalImg = document.getElementById("imgModalFull");
+    
+    // Mengambil semua foto di dalam galeri-grid secara otomatis
+    const fotoGaleri = document.querySelectorAll(".galeri-grid .galeri-item img");
+    
+    fotoGaleri.forEach(img => {
+        img.onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = this.src; // Memasukkan sumber foto yang diklik ke dalam modal
+        }
+    });
+    
+    // Fungsi untuk menutup modal
+    function tutupGaleri() {
+        modal.style.display = "none";
+    }
+    
+    // Fitur tambahan: Menutup modal jika area hitam di luar foto diklik
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            tutupGaleri();
+        }
+    }
 </script>
 
 </body></html>
