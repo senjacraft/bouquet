@@ -1,0 +1,803 @@
+ 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #fff8fb;
+    color: #333;
+}
+
+/* ==========================================
+   2. NAVIGATION & HERO
+   ========================================== */
+/* ==========================================
+   MENU NAVIGASI PREMIUM & MODERN
+   ========================================== */
+nav {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.9); /* Warna putih transparan */
+    backdrop-filter: blur(10px); /* Efek blur kaca kekinian */
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    gap: 35px; /* Jarak antar menu sedikit diperlebar */
+    padding: 18px 20px;
+    box-shadow: 0 4px 20px rgba(255, 79, 139, 0.08); /* Bayangan tipis warna pink tema */
+    z-index: 1000; /* Memastikan menu selalu berada di paling depan */
+    transition: all 0.3s ease;
+}
+
+nav a {
+    text-decoration: none;
+    color: #555; /* Warna teks abu-abu gelap yang elegan */
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    position: relative; /* Acuan untuk posisi garis bawah */
+    padding: 4px 0;
+    transition: color 0.3s ease;
+}
+
+/* Mengubah warna teks menjadi pink saat di-hover */
+nav a:hover {
+    color: #ff4f8b;
+}
+
+/* Membuat efek garis bawah berjalan (hidden di awal) */
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2.5px;
+    bottom: 0;
+    left: 0;
+    background-color: #ff4f8b; /* Warna garis bawah pink */
+    border-radius: 2px;
+    transition: width 0.3s ease; /* Efek animasi melebar */
+}
+
+/* Garis otomatis memanjang penuh saat menu di-hover */
+nav a:hover::after {
+    width: 100%;
+}
+
+/* ==========================================
+   OPTIMASI UNTUK LAYAR HP (MOBILE FRIENDLY)
+   ========================================== */
+@media (max-width: 768px) {
+    nav {
+        padding: 15px 10px;
+        gap: 15px; /* Jarak menu dirapatkan di HP agar muat */
+        overflow-x: auto; /* Jika layar terlalu kecil, menu bisa di-swipe kiri-kanan */
+        justify-content: flex-start; /* Dimulai dari kiri agar fitur swipe lancar */
+        white-space: nowrap; /* Mencegah menu turun merusak baris */
+    }
+    
+    nav::-webkit-scrollbar {
+        display: none; /* Menyembunyikan scrollbar bawaan di HP agar rapi */
+    }
+
+    nav a {
+        font-size: 0.9rem;
+        padding: 2px 5px;
+    }
+}
+
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #ffd6e7, #fff);
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 30px;
+    background: #ff4f8b;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+}
+
+/* ==========================================
+   3. LAYOUT CONTAINER & SECTION TITLE
+   ========================================== */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 60px 20px;
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    position: relative;
+}
+
+.container h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #ff4f8b;
+    margin: 10px auto 0;
+    border-radius: 10px;
+}
+
+/* ==========================================
+   4. CARDS COMPONENT
+   ========================================== */
+.cards {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px 0;
+    scroll-behavior: smooth;
+    justify-content: center; /* Tetap di tengah jika di layar laptop */
+}
+
+/* Menyembunyikan scrollbar bawaan browser */
+.cards::-webkit-scrollbar {
+    display: none;
+}
+
+/* 2. TAMPILAN KHUSUS MOBILE (Layar Handphone maksimal 768px) */
+@media (max-width: 768px) {
+    .cards {
+        justify-content: flex-start; /* Otomatis pindah ke kiri agar bisa di-scroll lancar */
+        padding: 20px 15px; /* Jarak aman agar kartu paling pinggir tidak menempel ke layar HP */
+    }
+}
+
+.card {
+    min-width: 220px;
+    width: 220px;
+    flex-shrink: 0;
+    background: white;
+    padding: 12px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    transform: translateY(-5px);
+}
+
+/* ==========================================
+   5. CARD IMAGES & BUTTONS (TRANSPARENT EFFECT)
+   ========================================== */
+.card-image-container {
+    position: relative; /* Acuan posisi tombol mengambang */
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.card-image-container img {
+   width: 100% !important;        /* Lebar penuh mengikuti kartu */
+        height: 250px !important;      /* KUNCI UTAMA: Tinggi wajib 250px, tidak boleh lebih! */
+        object-fit: cover !important;  /* KUNCI UTAMA: Foto otomatis di-crop proporsional agar TIDAK MELAR */
+        display: block;
+        transition: transform 0.4s ease;
+}
+
+.card:hover img {
+    transform: scale(1.05); /* Efek zoom sedikit saat kartu di-hover */
+}
+
+/* Tombol pesan tersembunyi & transparan di tengah foto */
+.btn-pesan {
+    display: none; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(37, 211, 102, 0.85); /* Hijau WhatsApp dengan transparan 85% */
+    color: white;
+    padding: 10px 18px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+
+/* Memunculkan tombol saat kartu mendapatkan class .active lewat JS */
+.card.active .btn-pesan {
+    display: inline-block;
+}
+
+/* ==========================================
+   6. CARD TEXTS & FOOTER
+   ========================================== */
+.card h3 {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+}
+
+.card p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ff4f8b; /* Menggunakan warna pink tema utama */
+    margin-bottom: 10px;
+}
+
+.footer {
+    text-align: center;
+    padding: 30px;
+    background: #222;
+    color: white;
+    margin-top: 50px;
+}
+
+.custom-section {
+    text-align: center;
+}
+
+.custom-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Container Langkah Order */
+.custom-steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.step-item {
+    flex: 1;
+    background: white;
+    padding: 30px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.04);
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: #ff4f8b;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+}
+
+.step-item h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.step-item p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Tombol WhatsApp Spesifik untuk Custom */
+.btn-custom-wa {
+    display: inline-block;
+    padding: 15px 35px;
+    background: #25d366; /* Warna Hijau WA */
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.btn-custom-wa:hover {
+    transform: translateY(-3px);
+    background: #20ba56;
+}
+
+/* Box Style untuk Pilihan Desain 2 */
+.custom-box {
+    background: white;
+    padding: 40px !important;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.05);
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+}
+
+.custom-content p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Responsif Mobile untuk Alur Langkah */
+@media (max-width: 768px) {
+    .custom-steps {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* ==========================================
+   8. GALERI PELANGGAN STYLES
+   ========================================== */
+.galeri-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+/* Membuat sistem grid/kotak-kotak */
+.galeri-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Default: 3 kolom di laptop */
+    gap: 15px;
+}
+
+.galeri-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    aspect-ratio: 1 / 1; /* Memaksa bentuk foto menjadi kotak 1:1 sempurna */
+}
+
+.galeri-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Foto anti melar/gepeng */
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+/* Efek teks melayang saat foto di-hover kursor */
+.galeri-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 79, 139, 0.4); /* Efek warna pink transparan */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Sembunyi di awal */
+    transition: opacity 0.3s ease;
+}
+
+.galeri-overlay span {
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+    border: 2px solid white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Trigger Efek Hover */
+.galeri-item:hover img {
+    transform: scale(1.1); /* Gambar nge-zoom sedikit */
+}
+
+.galeri-item:hover .galeri-overlay {
+    opacity: 1; /* Lapisan warna muncul */
+}
+
+.galeri-item:hover .galeri-overlay span {
+    transform: translateY(0); /* Teks naik sedikit */
+}
+
+/* Responsif Mobile (Layar Handphone) */
+@media (max-width: 768px) {
+    .galeri-grid {
+        grid-template-columns: repeat(2, 1fr); /* Berubah jadi 2 kolom di HP agar tidak kekecilan */
+        gap: 10px;
+    }
+    .galeri-overlay span {
+        font-size: 0.9rem;
+        padding: 4px 10px;
+    }
+}
+
+/* ==========================================
+   9. FAQ ACCORDION STYLES
+   ========================================== */
+.faq-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faq-item {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.03);
+    overflow: hidden;
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+/* Bagian Pertanyaan */
+.faq-question {
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s ease;
+}
+
+.faq-question:hover {
+    background: #fff5f8; /* Highlight warna pink tipis saat di-hover */
+}
+
+.faq-question h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.faq-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff4f8b;
+    transition: transform 0.3s ease;
+}
+
+/* Bagian Jawaban (Sembunyi secara default) */
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 25px;
+    background: #fafafa;
+}
+
+.faq-answer p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    padding-bottom: 20px; /* Jarak bawah teks setelah terbuka */
+}
+
+/* --- STATE SAAT FAQ AKTIF (TERBUKA) --- */
+.faq-item.active-faq {
+    border-color: #ffd6e7;
+    box-shadow: 0 4px 20px rgba(255, 79, 139, 0.1);
+}
+
+.faq-item.active-faq .faq-answer {
+    max-height: 200px; /* Batas tinggi maksimal saat terbuka */
+    padding-top: 15px;
+}
+
+.faq-item.active-faq .faq-icon {
+    transform: rotate(45deg); /* Mengubah tanda + menjadi x */
+    color: #999;
+}
+
+/* ==========================================
+   10. KONTAK SECTION STYLES
+   ========================================== */
+.kontak-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+/* Wrapper Utama menggunakan Flex */
+.kontak-wrapper {
+    display: flex;
+    gap: 40px;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.04);
+}
+
+/* Mengatur ukuran seimbang antara teks info dan peta */
+.kontak-info, .kontak-map {
+    flex: 1;
+}
+
+/* Elemen per item baris info */
+.kontak-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.kontak-icon {
+    font-size: 1.5rem;
+    background: #fff5f8;
+    padding: 10px;
+    border-radius: 12px;
+    line-height: 1;
+}
+
+.kontak-item h4 {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.kontak-item p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Tombol WA khusus area kontak */
+.btn-kontak-wa {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 25px;
+    background: #25d366;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2);
+    transition: all 0.3s ease;
+}
+
+.btn-kontak-wa:hover {
+    background: #20ba56;
+    transform: translateY(-2px);
+}
+
+/* Wadah Peta Google Maps */
+.kontak-map {
+    border-radius: 15px;
+    overflow: hidden;
+    min-height: 300px;
+    border: 1px solid #eee;
+}
+
+/* Responsif Layar Mobile / HP */
+@media (max-width: 768px) {
+    .kontak-wrapper {
+        flex-direction: column; /* Peta otomatis pindah ke bawah teks info saat di HP */
+        gap: 30px;
+        padding: 20px;
+    }
+    
+    .kontak-map {
+        height: 250px; /* Batasi tinggi peta di HP agar tidak terlalu panjang */
+    }
+}
+
+/* ==========================================
+   OPTIMASI RESPONSIF MOBILE KHUSUS KONTAK (ANTI TERPOTONG)
+   ========================================== */
+@media (max-width: 768px) {
+    .kontak-wrapper {
+        flex-direction: column; 
+        gap: 25px;
+        padding: 15px; 
+    }
+    
+    .kontak-map {
+        height: 250px; /* Menentukan tinggi wadah map di HP */
+        min-height: 250px;
+        width: 100%;
+    }
+
+    /* KUNCI PERBAIKAN: Memaksa isi peta Google Maps memenuhi wadah kotak */
+    .kontak-map iframe {
+        height: 250px !important;
+        width: 100% !important;
+        display: block;
+    }
+
+    .kontak-item {
+        margin-bottom: 20px;
+    }
+}
+
+.footer {
+    background: #1a1a1a; /* Warna hitam pekat elegan */
+    color: #ffffff; 
+    text-align: center;
+    padding: 45px 20px; /* Dipertebal sedikit agar lengkungan lebih proporsional */
+    margin-top: 50px; 
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+    /* KUNCI UTAMA: Membuat sudut atas melengkung halus, sudut bawah tetap rata */
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    
+    /* Opsional: Tambahkan bayangan ke atas agar perpindahan dari pink ke hitam lebih smooth */
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.06); 
+}
+
+/* Mengatur teks hak cipta */
+.footer p {
+    font-size: 0.9rem;
+    letter-spacing: 1px; 
+    margin: 0 0 10px 0;
+    opacity: 0.85; 
+}
+
+/* Teks kecil brand di bawah copyright */
+.footer-brand {
+    font-size: 0.75rem;
+    color: #ff4f8b; /* Sentuhan warna pink khas Senja Craft */
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+
+/* ==========================================
+   KALKULATOR INTERAKTIF SENJA CRAFT
+   ========================================== */
+.calculator-container {
+    background: #ffffff;
+    max-width: 450px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(255, 79, 139, 0.08);
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid rgba(255, 79, 139, 0.1);
+    text-align: center;
+}
+
+.calculator-container h3 {
+    color: #2c2c2c;
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.calc-subtitle {
+    font-size: 0.85rem;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.calc-group {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.calc-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 6px;
+}
+
+.calc-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid #ffd6e7;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: #333;
+    background-color: #fff5f8;
+    outline: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.calc-group select:focus {
+    border-color: #ff4f8b;
+    box-shadow: 0 0 8px rgba(255, 79, 139, 0.15);
+}
+
+/* Tampilan Hasil Harga */
+.calc-result {
+    background: #fff5f8;
+    padding: 20px;
+    border-radius: 16px;
+    margin-top: 25px;
+    border: 1px dashed #ff4f8b;
+}
+
+.calc-result span {
+    font-size: 0.85rem;
+    color: #666;
+    display: block;
+}
+
+.price-display {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ff4f8b;
+    margin: 5px 0;
+}
+
+.calc-note {
+    font-size: 0.75rem;
+    color: #999;
+    display: block;
+    font-style: italic;
+}
+
+/* Tombol Order Instan */
+.btn-calc-pesan {
+    display: block;
+    width: 100%;
+    background: #25d366;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2);
+    transition: all 0.3s ease;
+}
+
+.btn-calc-pesan:hover {
+    background: #20ba56;
+    transform: translateY(-2px);
+}
