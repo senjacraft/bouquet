@@ -1,7 +1,7 @@
 // 1. Fungsi untuk langsung membuka WhatsApp (Digunakan di tombol produk & tombol custom)
 function wa(pesan) {
     window.open(
-        "https://wa.me/6283142758042?text=" + encodeURIComponent(pesan),
+        "https://wa.me/6283898109100?text=" + encodeURIComponent(pesan),
         "_blank"
     );
 }
